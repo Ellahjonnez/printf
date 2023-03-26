@@ -1,6 +1,20 @@
 #include "main.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <ctype.h>
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c : The character to print
+ * Return : On success 1.
+ */
+
+int _putchar(char c)
+{
+        return (write(1, &c, 1));
+}
+
 
 /**
  * _printf - to produce output according to a format
@@ -15,20 +29,20 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while(format[i] != '\0')
+	while (format[i] != '\0')
 	{
-		if(format[i] == '%')
+		if (format[i] == '%')
 		{
 			switch (format[i + 1])
 			{
 				case 'c':
-					printer += _putchar( va_arg(args, int));
+					printer += _putchar(va_arg(args, int));
 					i += 2;
 					break;
 				case 's':
-					printer += _putchar(va_arg(args, char));
-					break;
+					printer += _puts(va_arg(args, char *));
 					i += 2;
+					break;
 				case '%':
 					printer += _putchar('%');
 					i += 2;
@@ -36,22 +50,34 @@ int _printf(const char *format, ...)
 				default:
 					i++;
 					continue;
-				}
+			}
+		}
+		else
+		{
 			printer += _putchar(format[i]);
 			i++;
 		}
 	}
 	va_end(args);
-	return(printer);
+	return (printer);
+
 }
 
+
 /**
- * _putchar - writes the character c to stdout
- * @c : The character to print
- * Return : On success 1.
+ * _puts - writes the string s to stdout
+ * @s : The string to print
+ * Return : On success the length of the string.
  */
 
-int _putchar(char c)
+int _puts(char *s)
 {
-	return (write(1, &c, 1));
+	int len = 0;
+
+	while (s[len] != '\0')
+	{
+		_putchar(s[len]);
+		len++;
+	}
+	return (len);
 }
