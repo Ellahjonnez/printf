@@ -5,18 +5,6 @@
 #include <unistd.h>
 
 /**
- * _putchar - writes the character c to stdout
- * @c : The character to print
- * Return : On success 1.
- */
-
-int _putchar(char c)
-{
-        return (write(1, &c, 1));
-}
-
-
-/**
  * _printf - to produce output according to a format
  * @format: The format string is composed of zero or more directives.
  * Return: the number of characters printed
@@ -63,6 +51,16 @@ int _printf(const char *format, ...)
 
 }
 
+/**
+ * _putchar - writes the character c to stdout
+ * @c : The character to print
+ * Return : On success 1.
+ */
+
+int _putchar(char c)
+{
+        return (write(1, &c, 1));
+}
 
 /**
  * _puts - writes the string s to stdout
