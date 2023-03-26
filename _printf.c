@@ -53,19 +53,19 @@ int _printf(const char *format, ...)
 
 /**
  * _putchar - writes the character c to stdout
- * @c : The character to print
- * Return : On success 1.
+ * @c: The character to print
+ * Return: On success 1.
  */
 
 int _putchar(char c)
 {
-        return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 /**
  * _puts - writes the string s to stdout
- * @s : The string to print
- * Return : On success the length of the string.
+ * @s: The string to print
+ * Return: On success the length of the string.
  */
 
 int _puts(char *s)
