@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
 
 /**
  * _printf - to produce output according to a format
@@ -10,6 +9,7 @@
  * Return: the number of characters printed
  * excluding the null byte used to end output to strings
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -28,11 +28,27 @@ int _printf(const char *format, ...)
 					i += 2;
 					break;
 				case 's':
-					printer += _puts(va_arg(args, char *));
+					printer += print_string(va_arg(args, char *));
 					i += 2;
 					break;
 				case '%':
 					printer += _putchar('%');
+					i += 2;
+					break;
+				case 'd':
+					printer += print_decimal(va_arg(args, int));
+					i += 2;
+					break;
+				case 'i':
+					printer += print_decimal(va_arg(args, int));
+					i += 2;
+					break;
+				case 'b':
+					printer += print_binary(va_arg(args, int));
+					i += 2;
+					break;
+				case 'u':
+					printer += print_unsigned(va_arg(args, unsigned int));
 					i += 2;
 					break;
 				default:
@@ -48,34 +64,5 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return (printer);
-
 }
 
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- * Return: On success 1.
- */
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- * _puts - writes the string s to stdout
- * @s: The string to print
- * Return: On success the length of the string.
- */
-
-int _puts(char *s)
-{
-	int len = 0;
-
-	while (s[len] != '\0')
-	{
-		_putchar(s[len]);
-		len++;
-	}
-	return (len);
-}
